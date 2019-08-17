@@ -1,0 +1,21 @@
+@for $i from 1 through 5 {
+  .p-v-#{$i} {
+    padding-top: $i * 5#{px}!important;
+    padding-bottom: $i * 5#{px}!important;
+  }
+
+  .p-h-#{$i} {
+    padding-left: $i * 5#{px}!important;
+    padding-right: $i * 5#{px}!important;
+  }
+
+  .m-v-#{$i} {
+    margin-top: $i * 5#{px}!important;
+    margin-bottom: ($i * 5)#{px}!important;
+  }
+
+  .m-h-#{$i} {
+    margin-left: $i * 5#{px}!important;
+    margin-right: $i * 5#{px}!important;
+  }
+}

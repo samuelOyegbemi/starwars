@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+$DEFAULT_FONT_FAMILY : 'Open Sans', sans-serif;
+
+$AVAILABLE_FONT_SIZES: 0.2rem, 0.5rem, 0.65rem, 0.85rem, 1.0rem, 1.5rem, 2.0rem, 3rem, 4.5rem;
+
+$AVAILABLE_FONT_WEIGHTS: 300, 400, 600, 700;
+
+$SIZE_IDENTIFIER: xxsm, xsm, sm, default, normal, md, bg, xbg, xxbg;
+
+$WEIGHT_IDENTIFIER: -light,'', -smbd, -bd;
+
+
+@mixin set-font($size: 1.0rem, $weight: 400, $family: $DEFAULT_FONT_FAMILY) {
+  font-size: $size!important;
+  line-height: $size * 2 !important;
+  font-weight: $weight;
+  font-family: $family;
+}
+
+@for $s from 1 through length($AVAILABLE_FONT_SIZES) {
+    @for $w from 1 through length($AVAILABLE_FONT_WEIGHTS) {
+        .font-#{nth($SIZE_IDENTIFIER, $s)}#{nth($WEIGHT_IDENTIFIER, $w)} {
+             @include set-font(nth($AVAILABLE_FONT_SIZES, $s), nth($AVAILABLE_FONT_WEIGHTS, $w)); }}}
+
