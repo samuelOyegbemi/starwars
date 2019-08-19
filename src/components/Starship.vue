@@ -4,25 +4,33 @@
     <div class="content p-2">
       <div class="m-1 d-flex flex-column align-self-end position-relative">
         <h5 class="p-1">{{ s.name }}</h5>
-        <p class="card-text p-h-1 font-sm">
-          {{ s.name }} was manufactured by {{ s.manufacturer }}
+        <p class="p-h-1 font-sm">
+          {{ s.name }} was manufactured by {{ s.manufacturer }}. Its model is
+          {{ s.model }}, and it has a capacity of {{ s.cargo_capacity }}
         </p>
-        <a href="#" class="btn-dark align-self-end p-v-1 p-h-3 font-sm"
+        <router-link
+          :to="`/starships/${getIndex(s.url)}`"
+          class="btn-dark align-self-end p-v-1 p-h-3 font-sm"
           ><span class="p-h-1">Read more</span>
           <font-awesome-icon icon="arrow-right" />
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { UtilityService } from "../services/Utilty.service";
+
 export default {
   props: ["s", "i"],
   methods: {
     getImage: i => {
       var images = require.context("../assets/", false, /\.jpg$/);
-      return images(`./starship-${(i % 3) + 1}.jpg`);
+      return images(`./starship-${(i % 6) + 1}.jpg`);
+    },
+    getIndex: url => {
+      return UtilityService.getIndex(url);
     }
   }
 };
@@ -39,7 +47,8 @@ img {
   background-color: #eeeeee;
   p {
     line-height: 1.4;
-    height: 30px;
+    height: 60px;
+    text-overflow: ellipsis;
   }
 }
 </style>

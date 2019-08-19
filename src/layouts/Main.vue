@@ -16,7 +16,7 @@
         <p>
           Find your favourite Characters, Films, Species, Starships and Planets
         </p>
-        <form class="form-inline flex-grow-1 m-h-5">
+        <form class="form-inline flex-grow-1 m-h-5" v-on:submit="loadData">
           <div class="input-group d-flex ">
             <div class="input-group-prepend">
               <button class="btn bg-light p-h-5" type="submit">
@@ -26,8 +26,10 @@
             <input
               class="form-control form-control-lg bg-light"
               type="search"
+              name="searchText"
               placeholder="Enter a search term"
               aria-label="Search"
+              :value="q"
             />
           </div>
         </form>
@@ -36,6 +38,21 @@
     <slot></slot>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    q: null
+  },
+  methods: {
+    loadData: function(ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      const s = ev.target.elements.searchText.value;
+      this.$router.push({ path: "/", query: { search: s } });
+    }
+  }
+};
+</script>
 
 <style scoped lang="scss">
 header {

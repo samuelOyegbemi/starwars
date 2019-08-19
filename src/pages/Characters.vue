@@ -1,14 +1,14 @@
 <template>
   <main-layout :q="q">
     <div>
-      <headings title="Popular Starships"></headings>
+      <headings title="Starwar Characters"></headings>
       <loading class="p-5" :value="loading"></loading>
       <div v-if="!loading">
         <div class="col-12 d-flex flex-wrap p-4">
-          <starship
-            v-for="(s, index) in starships"
-            v-bind="{ s, i: index }"
-          ></starship>
+          <people
+            v-for="(p, index) in people"
+            v-bind="{ p, i: index }"
+          ></people>
         </div>
         <div
           class="d-flex justify-content-center align-content-center p-3 pb-5"
@@ -49,7 +49,7 @@ import MainLayout from "../layouts/Main.vue";
 import * as http from "axios";
 import { apiConfig } from "../api-conf";
 import Headings from "../components/Headings";
-import Starship from "../components/Starship";
+import People from "../components/People";
 import Loading from "../components/Loading";
 import { UtilityService } from "../services/Utilty.service";
 
@@ -57,16 +57,16 @@ export default {
   components: {
     MainLayout,
     Headings,
-    Starship,
+    People,
     Loading
   },
   data() {
     return {
-      starships: null,
+      people: null,
       response: null,
       q: null,
+      startAt: 1,
       loading: true,
-      startAt: null,
       errored: false
     };
   },
@@ -80,7 +80,7 @@ export default {
           .get(UtilityService.updateQueryParam(url, "search", this.q))
           .then(response => {
             this.response = response.data;
-            this.starships = this.response.results;
+            this.people = this.response.results;
             this.startAt = UtilityService.getStartNum(this.response.previous);
             this.loading = false;
           })
@@ -92,7 +92,7 @@ export default {
     }
   },
   mounted() {
-    this.paginate(apiConfig.starships);
+    this.paginate(apiConfig.people);
   }
 };
 </script>
