@@ -68,6 +68,7 @@ export default {
         .get(`${apiConfig.starships}${id}/`)
         .then(response => {
           this.s = response.data;
+          document.title = `${this.s.name} | Starship | Starwars`;
           this.recentStarships =
             CookieService.getObject("recentStarships") || [];
           this.recentStarships = this.recentStarships.filter(
