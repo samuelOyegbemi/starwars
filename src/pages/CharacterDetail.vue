@@ -63,7 +63,7 @@ export default {
         .get(`${apiConfig.people}${id}/`)
         .then(response => {
           this.p = response.data;
-          document.title = `${this.s.name} | Character | Starwars`;
+          document.title = `${this.p.name} | Character | Starwars`;
           this.recentCharacters =
             CookieService.getObject("recentCharacters") || [];
           this.recentCharacters = this.recentCharacters.filter(
