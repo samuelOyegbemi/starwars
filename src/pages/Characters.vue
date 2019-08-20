@@ -1,9 +1,32 @@
 <template>
   <main-layout :q="q">
     <div>
-      <headings title="Starwar Characters"></headings>
+      <headings title="Starwars Characters"></headings>
       <loading class="p-5" :value="loading"></loading>
       <div v-if="!loading">
+        <div class="col-12 d-flex p-h-4 p-v-4">
+          <div class="p-h-2 form-inline">
+            <label for="filter" class="font-normal p-h-2">FILTER </label>
+            <select
+              name="filters"
+              id="filter"
+              class="form-control"
+              :value="filter"
+              @change="onFilter($event)"
+            >
+              <option value="">NONE</option>
+              <option value="male">MALE</option>
+              <option value="female">FEMALE</option>
+              <option value="n/a">ROBOT</option>
+            </select>
+          </div>
+          <div class="p-h-2 form-inline">
+            <label for="view" class="font-normal p-h-2">VIEW </label>
+            <select name="filters" id="view" class="form-control">
+              <option value="grid">GRID</option>
+            </select>
+          </div>
+        </div>
         <div class="col-12 d-flex flex-wrap p-4">
           <people
             v-for="(p, index) in people"
@@ -66,11 +89,22 @@ export default {
       response: null,
       q: null,
       startAt: 1,
+      filter: "",
+      currentUrl: "",
       loading: true,
       errored: false
     };
   },
   methods: {
+    onFilter(event) {
+      this.filter = event.target.value;
+      this.people = this.doFiltering();
+    },
+    doFiltering() {
+      return this.filter
+        ? (this.response.results || []).filter(p => p.gender === this.filter)
+        : this.response.results;
+    },
     paginate: function(url) {
       if (url) {
         this.loading = true;
@@ -79,8 +113,9 @@ export default {
         http
           .get(UtilityService.updateQueryParam(url, "search", this.q))
           .then(response => {
+            this.filter = ""; //reset filter so as not to confuse user
             this.response = response.data;
-            this.people = this.response.results;
+            this.people = this.doFiltering();
             this.startAt = UtilityService.getStartNum(this.response.previous);
             this.loading = false;
           })

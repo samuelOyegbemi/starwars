@@ -35,6 +35,11 @@
             v-bind="{ p, i: index }"
           ></planet>
         </div>
+        <div class="d-flex align-content-center justify-content-center">
+          <span class="dot rounded-circle"></span>
+          <span class="dot rounded-circle center"></span>
+          <span class="dot rounded-circle"></span>
+        </div>
       </div>
     </div>
     <div v-if="loading.people || (people && people.length > 0)">
@@ -133,5 +138,14 @@ export default {
 <style scoped lang="scss">
 .view-more {
   min-width: 400px !important;
+}
+.dot {
+  width: 16px;
+  height: 16px;
+  margin: 4px;
+  border: 1px solid #00000066;
+  &.center {
+    background-color: #00000066;
+  }
 }
 </style>
