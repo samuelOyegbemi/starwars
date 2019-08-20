@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 col-md-6 col-lg-4 p-3">
+  <div class="col-12 col-md-6 col-lg-4 p-3 slide">
     <img class="col-12 p-0" :src="getImage(i)" alt="" />
     <div class="content p-2">
       <div class="m-1 d-flex flex-column align-self-end position-relative">
@@ -37,6 +37,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../scss/animation";
 img {
   width: 96%;
   height: 200px;

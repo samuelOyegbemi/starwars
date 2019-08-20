@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 col-md-6 col-lg-4 p-3 wrapper d-flex">
+  <div class="col-12 col-md-6 col-lg-4 p-3 wrapper d-flex slide">
     <img class="col-12 p-0" :src="getImage(i)" alt="" />
     <div class="col-12 d-flex position-absolute justify-content-between">
       <span>Temp.: {{ p.surface_water }}</span>
@@ -22,6 +22,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../scss/animation";
 .wrapper {
   div {
     color: white;

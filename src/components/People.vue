@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 col-md-6 p-3 d-flex wrapper">
+  <div class="col-12 col-md-6 p-3 d-flex wrapper slide">
     <img class="p-0" :src="getImage(i)" alt="" />
     <div class="detail p-3">
       <h3 class="font-normal font-weight-bold pt-5">{{ p.name }}</h3>
@@ -30,6 +30,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../scss/animation";
+
 .wrapper {
   img {
     height: inherit !important;
